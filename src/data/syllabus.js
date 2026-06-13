@@ -1,5 +1,6 @@
-import portrait1 from '../assets/assets/portrait_1.png';
-import portrait2 from '../assets/assets/portrait_2.png';
+import nucleo1 from '../assets/assets/nucleo_1.png';
+import nucleo2 from '../assets/assets/nucleo_2.png';
+import nucleo3 from '../assets/assets/nucleo_3.png';
 
 export const syllabusData = {
   programa: {
@@ -14,9 +15,9 @@ export const syllabusData = {
       { tipo: "RESPETO", desc: "Interactúa de manera profesional reconociendo y aceptando al Otro y lo Otro desde la identidad y la diferencia, para la construcción de la paz." }
     ],
     nucleos: [
-      { id: "I", title: "Diálogos y dilemas sobre lo humano", desc: "Qué es lo humano: el debate divino vs animal; biológico vs cultural. Paradigmas de las Ciencias Sociales. Humanismos, Pos-humanismos y Transhumanismos.", img: portrait1, lectura: "H. Arendt (2005) \"La condición humana\"." },
-      { id: "II", title: "Vivir, recordar y re-existir", desc: "La memoria y la condición humana: individual, colectiva e histórica. Memoria de conflictos, miradas globales/nacionales, y violencias y paces urbanas.", img: portrait2, lectura: "G. Agamben (2007) \"¿Qué es lo contemporáneo?\"." },
-      { id: "III", title: "Jóvenes y responsabilidad política", desc: "La política y lo político. Sujetos políticos y subjetividad política juvenil. La acción política como expresión juvenil en nuevos sentidos de mundo y ciudad.", img: null, lectura: "F. Savater \"Política para Amador\"." }
+      { id: "I", title: "Diálogos y dilemas sobre lo humano", desc: "Qué es lo humano: el debate divino vs animal; biológico vs cultural. Paradigmas de las Ciencias Sociales. Humanismos, Pos-humanismos y Transhumanismos.", img: nucleo1, lectura: "H. Arendt (2005) \"La condición humana\"." },
+      { id: "II", title: "Vivir, recordar y re-existir", desc: "La memoria y la condición humana: individual, colectiva e histórica. Memoria de conflictos, miradas globales/nacionales, y violencias y paces urbanas.", img: nucleo2, lectura: "G. Agamben (2007) \"¿Qué es lo contemporáneo?\"." },
+      { id: "III", title: "Jóvenes y responsabilidad política", desc: "La política y lo político. Sujetos políticos y subjetividad política juvenil. La acción política como expresión juvenil en nuevos sentidos de mundo y ciudad.", img: nucleo3, lectura: "F. Savater \"Política para Amador\"." }
     ]
   },
   proceso: {
