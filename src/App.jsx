@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ProgramaPage from './pages/ProgramaPage';
 import ProcesoPage from './pages/ProcesoPage';
+import ScrollToTop from './components/ScrollToTop';
 import './index.css';
 
 function Footer() {
@@ -16,6 +17,7 @@ function Footer() {
 function App() {
   return (
     <HashRouter>
+      <ScrollToTop />
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Navbar />
         <div style={{ flex: 1 }}>

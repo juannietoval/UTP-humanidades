@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logoUrl from '../assets/assets/logo_utp/2.UTP_negro (2).svg';
 
 export default function Navbar() {
@@ -9,8 +9,8 @@ export default function Navbar() {
         <Link to="/" className="nav-link" style={{ display: 'flex', alignItems: 'center' }}>
           <img src={logoUrl} alt="UTP Logo" className="nav-logo-img" />
         </Link>
-        <Link to="/programa" className="nav-link">Programa</Link>
-        <Link to="/proceso" className="nav-link">Proceso</Link>
+        <NavLink to="/programa" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Programa</NavLink>
+        <NavLink to="/proceso" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Proceso</NavLink>
       </div>
     </nav>
   );

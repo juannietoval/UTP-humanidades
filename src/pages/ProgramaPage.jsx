@@ -14,10 +14,10 @@ export default function ProgramaPage() {
             <div className="card" style={{ gridColumn: 'span 4' }} key={i}>
               {n.img ? (
                 <div className="portrait-frame">
-                  <img src={n.img} alt={`Retrato histórico ${n.id}`} />
+                  <img src={n.img} alt={`Retrato histórico ${n.id}`} loading="lazy" />
                 </div>
               ) : (
-                <div style={{ border: '1px solid var(--primary)', padding: 'calc(var(--base-unit)*4)', aspectRatio: '1/1', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--tertiary)', marginBottom: 'calc(var(--base-unit) * 2)' }}>
+                <div style={{ border: '1px solid var(--primary)', padding: 'calc(var(--base-unit)*4)', aspectRatio: '3/4', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--tertiary)', marginBottom: 'calc(var(--base-unit) * 2)' }}>
                   <h1 style={{ margin: 0 }}>{n.id}</h1>
                 </div>
               )}

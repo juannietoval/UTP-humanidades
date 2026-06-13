@@ -123,6 +123,12 @@ p {
   display: flex;
   flex-direction: column;
   background-color: var(--neutral);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 6px 6px 0px var(--primary);
 }
 
 .card-title {
@@ -185,7 +191,7 @@ p {
   border: 1px solid transparent;
 }
 
-.nav-link:hover {
+.nav-link:hover, .nav-link.active {
   background-color: var(--primary);
   color: var(--neutral);
 }
@@ -215,17 +221,81 @@ p {
 .btn-primary:hover {
   background-color: var(--neutral);
   color: var(--primary);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px var(--primary);
+}
+
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid > * {
+    grid-column: span 2 !important;
+  }
+  /* The cards (Nucleos) should take half width on tablets */
+  .section#programa .grid > .card {
+    grid-column: span 1 !important;
+  }
 }
 
 @media (max-width: 768px) {
+  :root {
+    --margin-edge: 24px;
+    --gutter: 16px;
+  }
+  
   .grid {
     grid-template-columns: 1fr;
   }
-  .grid > * {
+  
+  .grid > *, .section#programa .grid > .card {
     grid-column: span 1 !important;
   }
+  
   .archival-list li {
     flex-direction: column;
+    gap: calc(var(--base-unit) * 0.5);
+  }
+  
+  .nav-bar {
+    flex-direction: column;
     gap: var(--base-unit);
+    padding: calc(var(--base-unit) * 2) var(--margin-edge);
+  }
+  
+  .nav-links {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .mural-hero {
+    min-height: 70vh;
+    padding-bottom: calc(var(--margin-edge) * 2);
+  }
+  
+  .hero-content {
+    padding: calc(var(--base-unit) * 2) 0;
+  }
+  
+  h1 { font-size: clamp(2.5rem, 10vw, 4rem); }
+  h2 { font-size: clamp(1.75rem, 8vw, 2.5rem); margin-bottom: calc(var(--base-unit) * 3); }
+  
+  .section {
+    padding: calc(var(--margin-edge) * 2) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--base-unit);
+  }
+  
+  .btn-primary {
+    width: 100%;
+    text-align: center;
+    padding: calc(var(--base-unit) * 2);
   }
 }
