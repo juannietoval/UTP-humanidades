@@ -147,14 +147,6 @@ function Proceso({ data }) {
 function Footer() {
   return (
     <footer className="section section-light" style={{ paddingBottom: 'calc(var(--margin-edge) * 0.5)' }}>
-      <div className="container">
-        <div className="grid">
-          <div style={{ gridColumn: 'span 12' }}>
-            <p className="label">Universidad Tecnológica de Pereira | Departamento de Humanidades</p>
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '14px', marginTop: 'var(--base-unit)' }}>Docente: Miguel Ángel Puentes Castro | miguel85@utp.edu.co</p>
-          </div>
-        </div>
-      </div>
     </footer>
   );
 }
