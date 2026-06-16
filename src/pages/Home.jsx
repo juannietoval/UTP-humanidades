@@ -17,11 +17,11 @@ export default function Home() {
       <section className="section section-light">
         <div className="container">
           <div className="grid">
-            <div style={{ gridColumn: 'span 4' }}>
-              <h2 style={{ borderBottom: 'none', paddingBottom: 0, marginBottom: '8px' }}>Justificación</h2>
-              <p className="label">Contexto del curso</p>
+            <div style={{ gridColumn: 'span 12' }}>
+              <h2 style={{ borderBottom: 'none', paddingBottom: 0, marginBottom: '8px', wordBreak: 'keep-all', whiteSpace: 'nowrap' }}>Justificación</h2>
+              <p className="label" style={{ marginBottom: '24px' }}>Contexto del curso</p>
             </div>
-            <div style={{ gridColumn: 'span 8', fontSize: '1.125rem' }}>
+            <div style={{ gridColumn: 'span 12', fontSize: '1.125rem' }}>
               <p>Las competencias académicas implican la formación de profesionales no solo en un quehacer específico, sino también en el desarrollo de capacidades comprensivas y analíticas sobre sí mismos y sobre su entorno.</p>
               
               <p>La reflexión sobre el sujeto contemporáneo, entendido como agente histórico y transformador de la realidad social, supone reconocer las múltiples dinámicas que han configurado el presente, un tiempo marcado por profundos desafíos a escala global, nacional y local. La crisis del capitalismo, la exacerbación de los conflictos internacionales, el cambio climático, la polarización política, el consumismo y la revolución tecnológica propia de la era digital, así como la creciente movilización social en torno a la paz, la memoria y el cuidado de la vida en todas sus formas, convierten este momento histórico en un reto mayúsculo para todos los campos del conocimiento y, en consecuencia, para los procesos educativos.</p>
