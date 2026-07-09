@@ -78,7 +78,7 @@ p {
 .mural-hero {
   height: 90vh;
   min-height: 600px;
-  background-image: url('https://github.com/juannietoval/CV-Miguel-Angel-Puentes-CASTRO/blob/main/imagen%20fondo.jpg?raw=true');
+  background-image: url('./assets/assets/imagen fondo.webp');
   background-size: cover;
   background-position: center;
   position: relative;
