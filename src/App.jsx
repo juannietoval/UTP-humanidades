@@ -4,6 +4,9 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ProgramaPage from './pages/ProgramaPage';
 import ProcesoPage from './pages/ProcesoPage';
+import LaboratorioPage from './pages/LaboratorioPage';
+import ActividadesPage from './pages/ActividadesPage';
+import AdminPage from './pages/AdminPage';
 import ScrollToTop from './components/ScrollToTop';
 import './index.css';
 
@@ -25,6 +28,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/programa" element={<ProgramaPage />} />
             <Route path="/proceso" element={<ProcesoPage />} />
+            <Route path="/laboratorio" element={<LaboratorioPage />} />
+            <Route path="/actividades" element={<ActividadesPage />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </div>
         <Footer />

@@ -1,0 +1,24 @@
+{
+  "home": {
+    "title": "Humanidades, Memoria y Política",
+    "description": "Un acercamiento reflexivo, sensible y situado a las múltiples dimensiones de lo humano —histórica, económica, política, social y cultural— como base para proyectar la existencia y el mundo por venir.",
+    "footerText": "Universidad Tecnológica de Pereira - Facultad de Bellas Artes y Humanidades - Departamento de Humanidades - Área de Formación Humana 2026"
+  },
+  "actividades": {
+    "proximos": [
+      { "id": 1, "dia": "15", "mes": "AGO", "titulo": "Taller de Memoria y Territorio", "desc": "Auditorio Principal • 2:00 PM" },
+      { "id": 2, "dia": "28", "mes": "AGO", "titulo": "Conversatorio: Jóvenes y Política", "desc": "Sala Múltiple • 4:00 PM" },
+      { "id": 3, "dia": "10", "mes": "SEP", "titulo": "Exposición de Fotoperformance", "desc": "Hall de Artes • Todo el día" },
+      { "id": 4, "dia": "25", "mes": "SEP", "titulo": "Laboratorio de Creación Colectiva", "desc": "Salón 304 • 10:00 AM" }
+    ],
+    "pasados": [
+      { "id": 5, "fecha": "19 Mayo 2026", "titulo": "Instalación Artística: Archivos de la Memoria", "imgs": ["WhatsApp Image 2026-05-21 at 08.19.22 (1).jpeg", "WhatsApp Image 2026-05-21 at 08.20.04 (1).jpeg", "WhatsApp Image 2026-05-21 at 08.19.22.jpeg"] },
+      { "id": 6, "fecha": "19 Mayo 2026", "titulo": "Exposición: Cuerpo, Objeto y Fotoperformance", "imgs": ["WhatsApp Image 2026-05-21 at 08.19.24.jpeg", "WhatsApp Image 2026-05-21 at 08.20.01.jpeg", "WhatsApp Image 2026-05-21 at 08.20.04.jpeg"] }
+    ]
+  },
+  "laboratorio": [
+    { "title": "Laboratorio Cuerpo y Fotoperformance", "desc": "Descripción del Laboratorio", "img": "fotoperformance.jpeg" },
+    { "title": "Archivos de la Memoria", "desc": "Descripción sobre los archivos", "img": "Memoria.jpeg" },
+    { "title": "Territorios", "desc": "Descripción sobre territorios", "img": "territorios.jpeg" }
+  ]
+}

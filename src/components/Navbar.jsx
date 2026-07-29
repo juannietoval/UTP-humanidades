@@ -9,8 +9,11 @@ export default function Navbar() {
         <Link to="/" className="nav-link" style={{ display: 'flex', alignItems: 'center' }}>
           <img src={logoUrl} alt="UTP Logo" className="nav-logo-img" />
         </Link>
+        <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} end>Inicio</NavLink>
         <NavLink to="/programa" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Programa</NavLink>
-        <NavLink to="/proceso" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Proceso</NavLink>
+        <NavLink to="/proceso" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Procesos</NavLink>
+        <NavLink to="/laboratorio" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Laboratorio Digital</NavLink>
+        <NavLink to="/actividades" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Actividades</NavLink>
       </div>
     </nav>
   );
