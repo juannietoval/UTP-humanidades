@@ -1,6 +1,6 @@
-import nucleo1 from '../assets/assets/nucleo_1.png';
-import nucleo2 from '../assets/assets/nucleo_2.png';
-import nucleo3 from '../assets/assets/nucleo_3.png';
+import nucleo1 from '../assets/assets/Unidad_I.jpeg';
+import nucleo2 from '../assets/assets/Unidad_II.jpeg';
+import nucleo3 from '../assets/assets/Unidad_III.jpeg';
 
 export const syllabusData = {
   programa: {
