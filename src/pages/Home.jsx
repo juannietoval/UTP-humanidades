@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import contentData from '../data/content.json';
+import { useContent } from '../context/ContentContext';
 
-export default function Home({ draftContent }) {
-  const { home } = draftContent || contentData;
+export default function Home() {
+  const { content } = useContent();
+  const { home } = content;
   return (
     <>
       <header className="mural-hero" id="inicio">

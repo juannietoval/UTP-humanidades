@@ -1,9 +1,11 @@
 import React from 'react';
-import contentData from '../data/content.json';
+import { useContent } from '../context/ContentContext';
 
-export default function LaboratorioPage({ draftContent }) {
-  const { laboratorio } = draftContent || contentData;
-  // Dinámicamente cargamos las imágenes desde assets/assets/ o web
+export default function LaboratorioPage() {
+  const { content } = useContent();
+  const { laboratorio } = content;
+  
+  // Soporte para URLs absolutas y locales
   const cards = laboratorio.map(c => ({
     ...c,
     img: c.img.startsWith('http') ? c.img : new URL(`../assets/assets/${c.img}`, import.meta.url).href

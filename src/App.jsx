@@ -8,6 +8,7 @@ import LaboratorioPage from './pages/LaboratorioPage';
 import ActividadesPage from './pages/ActividadesPage';
 import AdminPage from './pages/AdminPage';
 import ScrollToTop from './components/ScrollToTop';
+import { ContentProvider } from './context/ContentContext';
 import './index.css';
 
 function Footer() {
@@ -19,11 +20,12 @@ function Footer() {
 
 function App() {
   return (
-    <HashRouter>
-      <ScrollToTop />
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Navbar />
-        <div style={{ flex: 1 }}>
+    <ContentProvider>
+      <HashRouter>
+        <ScrollToTop />
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <Navbar />
+          <div style={{ flex: 1 }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/programa" element={<ProgramaPage />} />
@@ -36,6 +38,7 @@ function App() {
         <Footer />
       </div>
     </HashRouter>
+  </ContentProvider>
   );
 }
 

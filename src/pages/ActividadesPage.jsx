@@ -1,11 +1,12 @@
 import React from 'react';
-import contentData from '../data/content.json';
+import { useContent } from '../context/ContentContext';
 
-export default function ActividadesPage({ draftContent }) {
-  const { actividades } = draftContent || contentData;
+export default function ActividadesPage() {
+  const { content } = useContent();
+  const { actividades } = content;
   const { proximos: eventosProximos, pasados } = actividades;
 
-  // Process image paths for past events
+  // Process image paths for past events with support for http urls
   const eventosPasados = pasados.map(ev => ({
     ...ev,
     imgs: ev.imgs.map(imgPath => imgPath.startsWith('http') ? imgPath : new URL(`../assets/assets/${imgPath}`, import.meta.url).href)
