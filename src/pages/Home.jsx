@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import contentData from '../data/content.json';
 
-export default function Home() {
-  const { home } = contentData;
+export default function Home({ draftContent }) {
+  const { home } = draftContent || contentData;
   return (
     <>
       <header className="mural-hero" id="inicio">

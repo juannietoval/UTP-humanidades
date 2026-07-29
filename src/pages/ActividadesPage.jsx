@@ -1,14 +1,14 @@
 import React from 'react';
 import contentData from '../data/content.json';
 
-export default function ActividadesPage() {
-  const { actividades } = contentData;
+export default function ActividadesPage({ draftContent }) {
+  const { actividades } = draftContent || contentData;
   const { proximos: eventosProximos, pasados } = actividades;
 
   // Process image paths for past events
   const eventosPasados = pasados.map(ev => ({
     ...ev,
-    imgs: ev.imgs.map(imgPath => new URL(`../assets/assets/${imgPath}`, import.meta.url).href)
+    imgs: ev.imgs.map(imgPath => imgPath.startsWith('http') ? imgPath : new URL(`../assets/assets/${imgPath}`, import.meta.url).href)
   }));
 
   return (
