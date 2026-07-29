@@ -17,13 +17,7 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="section section-light">
-        <div className="container">
-          <p style={{ textAlign: 'center', fontSize: '1.25rem', fontWeight: 'bold' }}>
-            {home.footerText}
-          </p>
-        </div>
-      </section>
+
     </>
   );
 }
