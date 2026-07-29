@@ -22,6 +22,11 @@
   padding: 0;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   font-family: var(--font-body);
   color: var(--primary);
@@ -174,6 +179,34 @@ p {
   justify-content: space-between;
   align-items: center;
   background-color: var(--neutral);
+  position: relative;
+}
+
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: 2px solid var(--primary);
+  padding: 6px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.hamburger-btn:hover {
+  background-color: var(--primary);
+}
+
+.hamburger-btn:hover svg {
+  stroke: var(--neutral);
+}
+
+.hamburger-btn svg {
+  stroke: var(--primary);
+  stroke-width: 2;
+  stroke-linecap: round;
 }
 
 .nav-links {
@@ -257,22 +290,38 @@ p {
     gap: calc(var(--base-unit) * 0.5);
   }
   
+  .hamburger-btn {
+    display: flex;
+  }
+
   .nav-bar {
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: calc(var(--base-unit) * 2);
     padding: calc(var(--base-unit) * 2) var(--margin-edge);
   }
 
   .nav-logo-img {
     height: 40px;
+    margin-bottom: 0;
   }
   
   .nav-links {
-    justify-content: center;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--neutral);
+    border-bottom: 2px solid var(--primary);
+    padding: calc(var(--base-unit) * 2) var(--margin-edge);
+    z-index: 50;
     gap: calc(var(--base-unit) * 2);
+  }
+
+  .nav-links.open {
+    display: flex;
   }
   
   .mural-hero {
@@ -293,11 +342,6 @@ p {
 }
 
 @media (max-width: 480px) {
-  .nav-link {
-    font-size: 12px;
-    padding: calc(var(--base-unit) * 0.5) calc(var(--base-unit) * 1);
-  }
-  
   .btn-primary {
     width: 100%;
     text-align: center;

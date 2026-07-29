@@ -21,7 +21,7 @@ export default function ActividadesPage() {
         <h3 style={{ marginBottom: 'calc(var(--base-unit) * 4)' }}>Próximos Eventos</h3>
         <div className="grid" style={{ marginBottom: 'calc(var(--base-unit) * 8)' }}>
           {eventosProximos.map(ev => (
-            <div className="card" style={{ gridColumn: 'span 6', flexDirection: 'row', alignItems: 'center', gap: '24px' }} key={ev.id}>
+            <div className="card" style={{ gridColumn: 'span 6', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: '24px' }} key={ev.id}>
               {/* Burbuja de fecha (Calendario) */}
               <div style={{ 
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
@@ -31,7 +31,7 @@ export default function ActividadesPage() {
                 <span style={{ fontSize: '1.75rem', fontWeight: 'bold', lineHeight: 1 }}>{ev.dia}</span>
                 <span style={{ fontSize: '0.85rem', fontFamily: 'var(--font-mono)', textTransform: 'uppercase' }}>{ev.mes}</span>
               </div>
-              <div>
+              <div style={{ flex: '1 1 200px' }}>
                 <h3 style={{ margin: 0, marginBottom: '8px', fontSize: '1.25rem' }}>{ev.titulo}</h3>
                 <p style={{ margin: 0, fontSize: '0.95rem', color: 'var(--secondary)' }}>{ev.desc}</p>
               </div>
@@ -44,9 +44,9 @@ export default function ActividadesPage() {
         <div className="grid">
           {eventosPasados.map(ev => (
             <div className="card" style={{ gridColumn: 'span 12' }} key={ev.id}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '24px', borderBottom: '1px solid var(--primary)', paddingBottom: '12px' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '16px', marginBottom: '24px', borderBottom: '1px solid var(--primary)', paddingBottom: '12px' }}>
                 <h3 style={{ margin: 0 }}>{ev.titulo}</h3>
-                <span className="label" style={{ paddingLeft: '16px' }}>{ev.fecha}</span>
+                <span className="label" style={{ paddingLeft: '0' }}>{ev.fecha}</span>
               </div>
               <div style={{ display: 'flex', gap: '16px', overflowX: 'auto', paddingBottom: '8px' }}>
                 {ev.imgs.map((imgSrc, index) => (
