@@ -1,13 +1,10 @@
 import React from 'react';
-import nucleo1 from '../assets/assets/nucleo_1.png';
-import nucleo2 from '../assets/assets/nucleo_2.png';
-import nucleo3 from '../assets/assets/nucleo_3.png';
 
 export default function ProgramaPage() {
   const nucleos = [
-    { id: "I", title: "Diálogos y dilemas sobre lo humano", desc: "Tema 1. Qué es lo humano: el debate entre lo divino y lo animal; y entre lo biológico y lo cultural (el animal simbólico).\nTema 2. Paradigmas sobre lo humano: El lugar de las Ciencias Sociales y Humanas en las denominadas Ciencias Exactas. Debates, dilemas y tensiones entre lo clásico y lo contemporáneo.\nTema 3. Lo humano en las sociedades contemporáneas: Humanismos, Pos-humanismos y Transhumanismos.", img: nucleo1 },
-    { id: "II", title: "Vivir, recordar y re-existir: contextos contemporáneos", desc: "Tema 1. La memoria y la condición humana: individual, colectiva e histórica\nTema 2. Memoria de los conflictos y las violencias: miradas globales y nacionales\nTema 3. Memorias locales del dolor y la resistencia: violencias y paces urbanas", img: nucleo2 },
-    { id: "III", title: "Jóvenes y responsabilidad política en las sociedades contemporáneas", desc: "Tema 1. La política y lo político.\nTema 2. Sujetos políticos y subjetividad política juvenil\nTema 3. La acción política como expresión juvenil: nuevos sentidos de mundo y ciudad.", img: nucleo3 }
+    { id: "I", title: "Diálogos y dilemas sobre lo humano", desc: "Tema 1. Qué es lo humano: el debate entre lo divino y lo animal; y entre lo biológico y lo cultural (el animal simbólico).\nTema 2. Paradigmas sobre lo humano: El lugar de las Ciencias Sociales y Humanas en las denominadas Ciencias Exactas. Debates, dilemas y tensiones entre lo clásico y lo contemporáneo.\nTema 3. Lo humano en las sociedades contemporáneas: Humanismos, Pos-humanismos y Transhumanismos." },
+    { id: "II", title: "Vivir, recordar y re-existir: contextos contemporáneos", desc: "Tema 1. La memoria y la condición humana: individual, colectiva e histórica\nTema 2. Memoria de los conflictos y las violencias: miradas globales y nacionales\nTema 3. Memorias locales del dolor y la resistencia: violencias y paces urbanas" },
+    { id: "III", title: "Jóvenes y responsabilidad política en las sociedades contemporáneas", desc: "Tema 1. La política y lo político.\nTema 2. Sujetos políticos y subjetividad política juvenil\nTema 3. La acción política como expresión juvenil: nuevos sentidos de mundo y ciudad." }
   ];
 
   return (
@@ -82,24 +79,19 @@ export default function ProgramaPage() {
         </div>
 
         {/* 4. Contenido */}
-        <h3 style={{ marginBottom: 'calc(var(--base-unit) * 4)' }}>4. Contenido</h3>
         <div className="grid" style={{ marginBottom: 'calc(var(--base-unit) * 8)' }}>
-          {nucleos.map((n, i) => (
-            <div className="card" style={{ gridColumn: 'span 4' }} key={i}>
-              {n.img ? (
-                <div className="portrait-frame">
-                  <img src={n.img} alt={`Retrato histórico ${n.id}`} loading="lazy" />
-                </div>
-              ) : (
-                <div style={{ border: '1px solid var(--primary)', padding: 'calc(var(--base-unit)*4)', aspectRatio: '3/4', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--tertiary)', marginBottom: 'calc(var(--base-unit) * 2)' }}>
-                  <h1 style={{ margin: 0 }}>{n.id}</h1>
-                </div>
-              )}
-              <span className="label">Núcleo Problemático {n.id}</span>
-              <h3 className="card-title">{n.title}</h3>
-              <p className="card-text" style={{ whiteSpace: 'pre-line' }}>{n.desc}</p>
-            </div>
-          ))}
+          <div style={{ gridColumn: 'span 4' }}>
+            <h3>4. Contenido</h3>
+          </div>
+          <div style={{ gridColumn: 'span 8', fontSize: '1.125rem' }}>
+            {nucleos.map((n, i) => (
+              <div key={i} style={{ marginBottom: '24px' }}>
+                <span className="label" style={{ display: 'inline-block', marginBottom: '8px' }}>Unidad {n.id}</span>
+                <h4 style={{ margin: '0 0 12px 0' }}>{n.title}</h4>
+                <p style={{ whiteSpace: 'pre-line', margin: 0 }}>{n.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* 5. Requisitos */}
@@ -119,7 +111,7 @@ export default function ProgramaPage() {
             <p className="label">Lecturas y Audiovisuales</p>
           </div>
           <div style={{ gridColumn: 'span 8', fontSize: '1.125rem' }}>
-            <h4>Núcleo Problemático 1</h4>
+            <h4>Unidad 1</h4>
             <ul>
               <li>Arendt, H. (2005). La condición humana. Argentina: Ediciones Paidós.</li>
               <li>Ballesteros, J. (2012). Más allá de la eugenesia. El poshumanismo como negación del homo patiens.</li>
@@ -128,7 +120,7 @@ export default function ProgramaPage() {
             </ul>
             <p><strong>Audiovisuales:</strong> Serie Black Mirror (2011-2023), Serie Cyberpunk (2022), Video TEDxYouth: Are young people interested in politics?</p>
             
-            <h4 style={{ marginTop: '24px' }}>Núcleo Problemático 2</h4>
+            <h4 style={{ marginTop: '24px' }}>Unidad 2</h4>
             <ul>
               <li>Agamben, Giorgio (2007), ¿Qué es lo contemporáneo?</li>
               <li>Galtun, J. (2016). La violencia: cultural, estructural y directa.</li>
@@ -140,7 +132,7 @@ export default function ProgramaPage() {
             </ul>
             <p><strong>Audiovisuales:</strong> Película Relatos Salvajes (2014), Matar a Jesús (2017), Podcast Relatos Anfibios, Podcast Luz de la Noche (Comisión de la Verdad), Podcast Solaris.</p>
             
-            <h4 style={{ marginTop: '24px' }}>Núcleo Problemático 3</h4>
+            <h4 style={{ marginTop: '24px' }}>Unidad 3</h4>
             <ul>
               <li>Savater, Fernando. Política para Amador.</li>
               <li>Mouffe, Ch. (2010). En torno a lo político.</li>
@@ -195,22 +187,22 @@ export default function ProgramaPage() {
             <h3>10. Evaluación</h3>
           </div>
           <div style={{ gridColumn: 'span 8' }}>
-            <p style={{ fontSize: '1.125rem', marginBottom: '24px' }}>La evaluación del curso se desarrollará de manera continua, formativa y acumulativa, buscando valorar la comprensión y la capacidad de análisis de los temas, a partir de la formación de pensamiento crítico, desde la acción creativa, a partir de documentos escritos, productos visuales o auditivos que aporten a la comprensión de los núcleos problemáticos.</p>
+            <p style={{ fontSize: '1.125rem', marginBottom: '24px' }}>La evaluación del curso se desarrollará de manera continua, formativa y acumulativa, buscando valorar la comprensión y la capacidad de análisis de los temas, a partir de la formación de pensamiento crítico, desde la acción creativa, a partir de documentos escritos, productos visuales o auditivos que aporten a la comprensión de las unidades.</p>
             <div className="grid">
               <div className="card" style={{ gridColumn: 'span 4', backgroundColor: 'var(--neutral)' }}>
                 <h1 style={{ marginBottom: '8px' }}>30%</h1>
                 <span className="label">Primer Parcial</span>
-                <p style={{ fontSize: '14px', marginTop: '16px' }}>Actividades desarrolladas en el núcleo problemático 1.</p>
+                <p style={{ fontSize: '14px', marginTop: '16px' }}>Actividades desarrolladas en la unidad 1.</p>
               </div>
               <div className="card" style={{ gridColumn: 'span 4', backgroundColor: 'var(--neutral)' }}>
                 <h1 style={{ marginBottom: '8px' }}>30%</h1>
                 <span className="label">Segundo Parcial</span>
-                <p style={{ fontSize: '14px', marginTop: '16px' }}>Actividades desarrolladas en el núcleo problemático 2.</p>
+                <p style={{ fontSize: '14px', marginTop: '16px' }}>Actividades desarrolladas en la unidad 2.</p>
               </div>
               <div className="card" style={{ gridColumn: 'span 4', backgroundColor: 'var(--neutral)' }}>
                 <h1 style={{ marginBottom: '8px' }}>40%</h1>
                 <span className="label">Parcial final</span>
-                <p style={{ fontSize: '14px', marginTop: '16px' }}>Actividades desarrolladas en el núcleo problemático 3.</p>
+                <p style={{ fontSize: '14px', marginTop: '16px' }}>Actividades desarrolladas en la unidad 3.</p>
               </div>
             </div>
           </div>
