@@ -59,7 +59,8 @@ export default function AdminPage() {
         path: 'src/data/content.json',
       });
       
-      const contentDecoded = atob(response.data.content);
+      // Decodificación segura para UTF-8 (tildes y eñes)
+      const contentDecoded = decodeURIComponent(escape(atob(response.data.content)));
       setContent({
         data: JSON.parse(contentDecoded),
         sha: response.data.sha,
