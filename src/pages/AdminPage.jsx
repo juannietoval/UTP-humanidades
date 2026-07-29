@@ -34,16 +34,35 @@ const Accordion = ({ title, children, defaultOpen = false }) => {
   );
 };
 
-const ImageThumbnail = ({ value }) => {
+const ImageThumbnail = ({ value, assets }) => {
   if (!value) return null;
   const isUrl = value.startsWith('http');
-  // Hack: if not url, assume it's in assets folder (Note: vite's new URL meta import doesn't easily work with dynamic arbitrary strings in admin side without actually importing them all, but we can try to guess or just show broken link symbol)
-  // For local files in Admin, since they aren't bundled the same way, we might just not show a true preview, but if it's an HTTP url we can!
-  // To avoid complex dev-server resolutions for local assets inside this mini-component, we'll only show thumbnails for absolute URLs.
+  
+  let imgUrl = null;
   if (isUrl) {
-    return <img src={value} alt="preview" style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '4px', border: '1px solid #ddd' }} />;
+    imgUrl = value;
+  } else {
+    // Si es un archivo local, buscamos su download_url de github
+    const asset = assets.find(a => a.name === value);
+    if (asset) {
+      imgUrl = asset.url;
+    }
   }
-  return <div style={{ width: '40px', height: '40px', background: '#eee', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#666', border: '1px solid #ddd', textAlign: 'center' }}>Local<br/>Asset</div>;
+
+  if (imgUrl) {
+    return (
+      <div style={{ width: '80px', height: '80px', flexShrink: 0, borderRadius: '4px', overflow: 'hidden', border: '1px solid #ddd' }}>
+        <img 
+          src={imgUrl} 
+          alt="preview" 
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+          onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<div style="padding:4px; font-size:10px; color:red; text-align:center; height:100%; display:flex; align-items:center;">Error al cargar</div>'; }}
+        />
+      </div>
+    );
+  }
+  
+  return <div style={{ width: '80px', height: '80px', flexShrink: 0, background: '#eee', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#666', border: '1px solid #ddd', textAlign: 'center' }}>No<br/>encontrada</div>;
 };
 
 // --- Componente Principal ---
@@ -74,7 +93,10 @@ export default function AdminPage() {
     try {
       const response = await octokit.rest.repos.getContent({ owner, repo: repoName, path: 'src/assets/assets' });
       if (Array.isArray(response.data)) {
-        setAssets(response.data.filter(f => f.type === 'file').map(f => f.name));
+        setAssets(response.data.filter(f => f.type === 'file').map(f => ({
+          name: f.name,
+          url: f.download_url
+        })));
       }
     } catch (err) {
       console.error("No se pudieron cargar los assets", err);
@@ -125,7 +147,7 @@ export default function AdminPage() {
       setContent(prev => ({ ...prev, sha: response.data.content.sha }));
       setOriginalContent(JSON.parse(JSON.stringify({ ...content, sha: response.data.content.sha })));
       
-      showToast('¡Cambios guardados con éxito!', 'success');
+      showToast('Cambios guardados con éxito', 'success');
     } catch (err) {
       showToast('Error al guardar. Verifica que tu token tenga permisos repo.', 'error');
       console.error(err);
@@ -245,18 +267,23 @@ export default function AdminPage() {
               </div>
 
               {assets.length > 0 && (
-                <Accordion title="🖼️ Galería de Imágenes Locales">
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                    {assets.map(a => <span key={a} style={{ background: '#f0f0f0', padding: '4px 8px', borderRadius: '4px', fontSize: '0.85rem', border: '1px solid #ddd' }}>{a}</span>)}
+                <Accordion title="Galería de Imágenes Locales">
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '12px' }}>
+                    {assets.map(a => (
+                      <div key={a.name} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#f0f0f0', padding: '8px', borderRadius: '8px', border: '1px solid #ddd' }}>
+                        <img src={a.url} alt={a.name} style={{ width: '100%', height: '80px', objectFit: 'cover', borderRadius: '4px', marginBottom: '8px' }} />
+                        <span style={{ fontSize: '0.75rem', wordBreak: 'break-all', textAlign: 'center' }}>{a.name}</span>
+                      </div>
+                    ))}
                   </div>
-                  <p style={{ fontSize: '0.85rem', marginTop: '12px', color: '#666' }}>Copia estos nombres para usarlos en Laboratorio o Actividades. O bien, pega URLs completas (https://...).</p>
+                  <p style={{ fontSize: '0.85rem', marginTop: '16px', color: '#666' }}>Copia el nombre de las imágenes (ej. <strong>Memoria.jpeg</strong>) y pégalo en los campos de imagen. También puedes usar enlaces externos completos (ej. <strong>https://...</strong>).</p>
                 </Accordion>
               )}
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                 
                 {/* HOME EDITOR */}
-                <Accordion title="🏠 Página de Inicio" defaultOpen={true}>
+                <Accordion title="Página de Inicio" defaultOpen={true}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                     <div>
                       <label style={labelStyle}>Título principal</label>
@@ -274,10 +301,10 @@ export default function AdminPage() {
                 </Accordion>
 
                 {/* LABORATORIO EDITOR */}
-                <Accordion title="🔬 Laboratorio Digital">
+                <Accordion title="Laboratorio Digital">
                   {content.data.laboratorio.map((lab, index) => (
                     <div key={index} style={{ background: '#fafafa', padding: '16px', borderRadius: '8px', marginBottom: '16px', border: '1px solid #eee', position: 'relative' }}>
-                      <button onClick={() => handleRemoveArrayItem('laboratorio', index)} style={{ position: 'absolute', top: '16px', right: '16px', color: 'red', border: 'none', background: 'none', cursor: 'pointer' }}>🗑️</button>
+                      <button onClick={() => handleRemoveArrayItem('laboratorio', index)} style={{ position: 'absolute', top: '16px', right: '16px', color: 'red', border: 'none', background: 'none', cursor: 'pointer', fontWeight: 'bold' }}>Eliminar</button>
                       <h4 style={{ margin: '0 0 16px 0' }}>Tarjeta {index + 1}</h4>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                         <div>
@@ -291,8 +318,8 @@ export default function AdminPage() {
                         <div>
                           <label style={labelStyle}>Imagen</label>
                           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                            <ImageThumbnail value={lab.img} />
-                            <input type="text" value={lab.img} onChange={e => handleChange(`laboratorio.${index}.img`, e.target.value)} style={inputStyle} placeholder="Nombre local o HTTP url" />
+                            <ImageThumbnail value={lab.img} assets={assets} />
+                            <input type="text" value={lab.img} onChange={e => handleChange(`laboratorio.${index}.img`, e.target.value)} style={inputStyle} placeholder="Nombre de imagen o URL" />
                           </div>
                         </div>
                       </div>
@@ -302,10 +329,10 @@ export default function AdminPage() {
                 </Accordion>
 
                 {/* ACTIVIDADES - PROXIMOS EDITOR */}
-                <Accordion title="📅 Próximos Eventos">
+                <Accordion title="Próximos Eventos">
                   {content.data.actividades.proximos.map((ev, index) => (
                     <div key={index} style={{ background: '#fafafa', padding: '16px', borderRadius: '8px', marginBottom: '16px', border: '1px solid #eee', position: 'relative' }}>
-                      <button onClick={() => handleRemoveArrayItem('actividades.proximos', index)} style={{ position: 'absolute', top: '16px', right: '16px', color: 'red', border: 'none', background: 'none', cursor: 'pointer' }}>🗑️</button>
+                      <button onClick={() => handleRemoveArrayItem('actividades.proximos', index)} style={{ position: 'absolute', top: '16px', right: '16px', color: 'red', border: 'none', background: 'none', cursor: 'pointer', fontWeight: 'bold' }}>Eliminar</button>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                         <div style={{ display: 'flex', gap: '12px' }}>
                           <div style={{ flex: 1 }}>
@@ -332,10 +359,10 @@ export default function AdminPage() {
                 </Accordion>
 
                 {/* ACTIVIDADES - PASADOS EDITOR */}
-                <Accordion title="📸 Eventos Pasados (Galería)">
+                <Accordion title="Eventos Pasados (Galería)">
                   {content.data.actividades.pasados.map((ev, index) => (
                     <div key={index} style={{ background: '#fafafa', padding: '16px', borderRadius: '8px', marginBottom: '16px', border: '1px solid #eee', position: 'relative' }}>
-                      <button onClick={() => handleRemoveArrayItem('actividades.pasados', index)} style={{ position: 'absolute', top: '16px', right: '16px', color: 'red', border: 'none', background: 'none', cursor: 'pointer' }}>🗑️</button>
+                      <button onClick={() => handleRemoveArrayItem('actividades.pasados', index)} style={{ position: 'absolute', top: '16px', right: '16px', color: 'red', border: 'none', background: 'none', cursor: 'pointer', fontWeight: 'bold' }}>Eliminar</button>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                         <div>
                           <label style={labelStyle}>Fecha Completa</label>
@@ -350,9 +377,9 @@ export default function AdminPage() {
                           <label style={labelStyle}>Imágenes (Galería)</label>
                           {ev.imgs.map((imgStr, i) => (
                             <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '8px' }}>
-                              <ImageThumbnail value={imgStr} />
-                              <input type="text" value={imgStr} onChange={e => handleChange(`actividades.pasados.${index}.imgs.${i}`, e.target.value)} style={inputStyle} />
-                              <button onClick={() => handleRemoveImgFromArray(`actividades.pasados.${index}`, i)} style={{ color: 'red', border: 'none', background: 'none', cursor: 'pointer' }}>✕</button>
+                              <ImageThumbnail value={imgStr} assets={assets} />
+                              <input type="text" value={imgStr} onChange={e => handleChange(`actividades.pasados.${index}.imgs.${i}`, e.target.value)} style={inputStyle} placeholder="Nombre de imagen o URL" />
+                              <button onClick={() => handleRemoveImgFromArray(`actividades.pasados.${index}`, i)} style={{ color: 'red', border: 'none', background: 'none', cursor: 'pointer', fontWeight: 'bold', padding: '8px' }}>X</button>
                             </div>
                           ))}
                           <button onClick={() => handleAddImgToArray(`actividades.pasados.${index}`, '')} style={{ background: '#eee', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', width: '100%', marginTop: '8px' }}>+ Agregar Foto a esta galería</button>
@@ -367,7 +394,7 @@ export default function AdminPage() {
 
               <div style={{ position: 'sticky', bottom: 0, background: 'var(--neutral)', padding: '20px 0', borderTop: '1px solid #ddd', marginTop: '32px' }}>
                 <button onClick={handleSave} className="btn-primary" style={{ width: '100%', padding: '16px', fontSize: '1.1rem', boxShadow: '0 4px 12px rgba(var(--primary-rgb), 0.3)' }} disabled={loading}>
-                  {loading ? 'Guardando en GitHub...' : '🚀 Guardar y Publicar'}
+                  {loading ? 'Guardando en GitHub...' : 'Guardar y Publicar'}
                 </button>
               </div>
             </div>
@@ -375,7 +402,7 @@ export default function AdminPage() {
             {/* RIGHT COLUMN: PREVIEW */}
             <div style={{ gridColumn: 'span 7', display: 'flex', flexDirection: 'column', height: '85vh' }}>
               <div style={{ display: 'flex', gap: '16px', marginBottom: '16px', background: 'var(--neutral)', padding: '16px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}>
-                <h4 style={{ margin: 0, alignSelf: 'center', marginRight: 'auto' }}>👁️ Previsualización:</h4>
+                <h4 style={{ margin: 0, alignSelf: 'center', marginRight: 'auto' }}>Previsualización en Vivo:</h4>
                 <button className={`btn-primary ${activePreview === 'Home' ? '' : 'outline'}`} onClick={() => setActivePreview('Home')} style={{ padding: '8px 16px' }}>Inicio</button>
                 <button className={`btn-primary ${activePreview === 'Laboratorio' ? '' : 'outline'}`} onClick={() => setActivePreview('Laboratorio')} style={{ padding: '8px 16px' }}>Laboratorio</button>
                 <button className={`btn-primary ${activePreview === 'Actividades' ? '' : 'outline'}`} onClick={() => setActivePreview('Actividades')} style={{ padding: '8px 16px' }}>Actividades</button>
